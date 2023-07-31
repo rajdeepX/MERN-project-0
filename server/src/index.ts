@@ -1,5 +1,6 @@
 import express, { Request, Response } from "express";
 import mongoose from "mongoose"; /*mongoose is a library used to connect to the mongoDB*/
+require("dotenv").config();
 import DeckModel from "./models/Deck";
 
 const app = express();
@@ -45,15 +46,11 @@ app.post("/decks", async (req: Request, res: Response) => {
   res.json(createdDeck);
 });
 
-mongoose
-  .connect(
-    "mongodb+srv://redmiremote07:R7lY46ASyEVNpD5V@cluster0.6url4gm.mongodb.net/?retryWrites=true&w=majority"
-  )
-  .then(() => {
-    app.listen(3000, () => {
-      console.log("server started at port: 3000");
-    });
+mongoose.connect(process.env.MONGO_URL!).then(() => {
+  app.listen(3000, () => {
+    console.log("server started at port: 3000");
   });
+});
 
 /*
 We can separately run the mongoose.connect(url) and the app.listen()
@@ -61,5 +58,3 @@ But here we want to load the server only when we are successfully connected to o
 */
 
 // server created at port:3000
-
-// R7lY46ASyEVNpD5V
