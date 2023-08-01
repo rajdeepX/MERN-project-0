@@ -1,6 +1,7 @@
 import express, { Request, Response } from "express";
 import mongoose from "mongoose"; /*mongoose is a library used to connect to the mongoDB*/
 require("dotenv").config();
+import cors from "cors";
 import DeckModel from "./models/Deck";
 
 const app = express();
@@ -34,16 +35,30 @@ the nodemon will start the server and watch for any changes to the .ts or .json 
 
 */
 
+app.use(cors());
 app.use(express.json());
 
+app.get("/decks", async (req: Request, res: Response) => {
+  // To fetch all the decks from the database and send them to the client
+
+  // Q1. How to fetch the decks from mongoDB?
+
+  const decks = await DeckModel.find();
+  // Q2. Ho do we send back the array to the UI?
+
+  res.json(decks);
+});
+
 app.post("/decks", async (req: Request, res: Response) => {
-  console.log(req.body);
+  // Post the deck from the client to the database.
+
+  console.log(req.body); //this is to check the req.body or the client input sent to the backend
 
   const newDeck = new DeckModel({
     title: req.body.title,
-  });
-  const createdDeck = await newDeck.save();
-  res.json(createdDeck);
+  }); // creates a new deck/note with the schema (already setup), using the data from the frontend
+  const createdDeck = await newDeck.save(); // saves the data to the database
+  res.json(createdDeck); //server response to the client with the created deck data
 });
 
 mongoose.connect(process.env.MONGO_URL!).then(() => {
