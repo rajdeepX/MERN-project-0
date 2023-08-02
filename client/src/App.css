@@ -13,6 +13,7 @@
 }
 
 .decks li {
+  position: relative;
   border: 1px solid #fff;
   list-style: none;
   height: 120px;
@@ -25,7 +26,7 @@
 }
 
 .decks li:hover {
-  background-color: #ddd;
+  background-color: #eee;
   cursor: pointer;
   transition: 0.3s all;
 }
@@ -41,4 +42,22 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
+}
+
+.decks li button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  font-size: 10px;
+}
+
+.decks li button:hover {
+  background-color: #555;
+  color: #fff;
+  transition: 0.4s all;
+}
+
+.decks li a {
+  text-decoration: none;
+  color: inherit;
 }
