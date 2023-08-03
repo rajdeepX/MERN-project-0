@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import getDeck, { TDeck } from "../api/getDeck";
+import getDecks, { TDeck } from "../api/getDecks";
 import createDeck from "../api/createDeck";
 import deleteDeck from "../api/deleteDeck";
 
@@ -16,7 +16,7 @@ const Home = () => {
   };
 
   const fetchDecks = async () => {
-    const newDecks = await getDeck();
+    const newDecks = await getDecks();
     setDecks(newDecks);
   };
 

@@ -3,6 +3,9 @@ import mongoose from "mongoose"; /*mongoose is a library used to connect to the 
 require("dotenv").config();
 import cors from "cors";
 import DeckModel from "./models/Deck";
+import { createCardForDeckController } from "../controller/createCardForDeck";
+import { getDeckController } from "../controller/getDeckController";
+import { deleteCardOnDeckController } from "../controller/deleteCardOnDeckController";
 
 const app = express();
 /*
@@ -71,6 +74,10 @@ app.delete("/decks/:deckId", async (req: Request, res: Response) => {
   // 3. Send response to client
   res.json(deletedDeck);
 });
+
+app.post("/decks/:deckId/cards", createCardForDeckController);
+app.get("/decks/:deckId", getDeckController);
+app.delete("/decks/:deckId/cards/:index", deleteCardOnDeckController);
 
 mongoose.connect(process.env.MONGO_URL!).then(() => {
   app.listen(3000, () => {
