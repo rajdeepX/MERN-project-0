@@ -3,7 +3,6 @@ import createCard from "../api/createCard";
 import { useParams } from "react-router-dom";
 import getDeck from "../api/getDeck";
 import { TDeck } from "../api/getDecks";
-import deleteDeck from "../api/deleteDeck";
 import deleteCard from "../api/deleteCard";
 
 const Decks = () => {
@@ -58,6 +57,7 @@ const Decks = () => {
             setText(e.target.value);
           }}
           value={text}
+          required
         />
         <button>Create Card</button>
       </form>
